@@ -31,7 +31,8 @@ const defaultTeams = [
   { name: 'Equipo 1', color: '#d7263d' },
   { name: 'Equipo 2', color: '#1b9aaa' },
   { name: 'Equipo 3', color: '#f4a261' },
-  { name: 'Equipo 4', color: '#6a4c93' }
+  { name: 'Equipo 4', color: '#6a4c93' },
+  { name: 'Equipo 5', color: '#2f9e44' }
 ].map((t, idx) => ({
   ...t,
   id: idx,
@@ -59,10 +60,27 @@ export const createInitialState = () => ({
 export function loadState() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? JSON.parse(raw) : createInitialState();
+    return raw ? normalizeState(JSON.parse(raw)) : createInitialState();
   } catch {
     return createInitialState();
   }
+}
+
+
+function normalizeState(savedState) {
+  const base = createInitialState();
+  const teams = Array.isArray(savedState?.teams) ? savedState.teams.slice(0, defaultTeams.length) : [];
+
+  while (teams.length < defaultTeams.length) {
+    teams.push(structuredClone(defaultTeams[teams.length]));
+  }
+
+  return {
+    ...base,
+    ...savedState,
+    teams,
+    currentTeam: Math.min(savedState?.currentTeam ?? 0, teams.length - 1)
+  };
 }
 
 export function saveState(state) {
