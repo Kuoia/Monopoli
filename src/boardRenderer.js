@@ -74,12 +74,12 @@ export function renderTeams(state) {
       <label>Nombre equipo</label>
       <input data-team-name="${i}" value="${team.name}" />
       <div class="stat-grid">
-        <span>Banco:</span><strong>${fmt(team.bank)}</strong>
-        <span>IVA soportado:</span><strong>${fmt(team.vatInput)}</strong>
-        <span>IVA repercutido:</span><strong>${fmt(team.vatOutput)}</strong>
-        <span>Pasivo:</span><strong>${fmt(team.liabilities)}</strong>
-        <span>Activo:</span><strong>${fmt(team.propertiesValue)}</strong>
-        <span>PN:</span><strong class="${pn < 0 ? 'warn' : 'ok'}">${fmt(pn)}</strong>
+        <span><abbr title="Banco">Bco.</abbr></span><strong class="money-big">${fmt(team.bank)}</strong>
+        <span><abbr title="IVA soportado">IVA sop.</abbr></span><strong class="money-big">${fmt(team.vatInput)}</strong>
+        <span><abbr title="IVA repercutido">IVA rep.</abbr></span><strong class="money-big">${fmt(team.vatOutput)}</strong>
+        <span><abbr title="Pasivo">Pas.</abbr></span><strong class="money-big">${fmt(team.liabilities)}</strong>
+        <span><abbr title="Activo">Act.</abbr></span><strong class="money-big">${fmt(team.propertiesValue)}</strong>
+        <span><abbr title="Patrimonio neto">P.N.</abbr></span><strong class="money-big ${pn < 0 ? 'warn' : 'ok'}">${fmt(pn)}</strong>
       </div>`;
     wrap.appendChild(card);
   });
