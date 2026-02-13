@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Monopoly Contable – Simulador Empresarial con IVA</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Monopoly Contable – Simulador Empresarial con IVA (21%)</h1>
+      <div class="turno-wrap">
+        <span id="turno-actual"></span>
+        <button id="btn-dado">🎲 Tirar dado</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="board-section">
+        <div id="board" class="board"></div>
+      </section>
+
+      <aside class="sidebar">
+        <h2>Equipos</h2>
+        <div id="teams-panel"></div>
+
+        <section class="admin-panel" id="admin-panel"></section>
+      </aside>
+    </main>
+
+    <dialog id="operation-modal">
+      <div id="operation-content"></div>
+    </dialog>
+
+    <dialog id="ranking-modal">
+      <div id="ranking-content"></div>
+    </dialog>
+
+    <script type="module" src="src/main.js"></script>
+  </body>
+</html>
