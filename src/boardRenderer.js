@@ -19,13 +19,24 @@ export function renderBoard(state) {
       const cell = document.createElement('div');
       cell.className = 'cell';
       if (idx === null) {
-        cell.style.background = '#dbe6fb';
-        cell.innerHTML = '<div class="title">Monopoly Contable</div>';
+        cell.classList.add('cell-center');
+        cell.innerHTML = `<div class="center-wrap">
+          <p class="center-brand">MONOPOLI</p>
+          <h3>Centro del tablero</h3>
+          <p class="center-sub">Tarjetas sorpresa y banca central</p>
+          <div class="center-icons" aria-hidden="true">
+            <span>❓</span>
+            <span>💵</span>
+            <span>🏦</span>
+            <span>🎲</span>
+          </div>
+        </div>`;
       } else {
         const data = board[idx];
         const owner = ownerTag(state, idx);
+        cell.classList.add(`cell-${data.type}`);
         cell.innerHTML = `<div class="title">${data.name}</div>
-          <div class="sub">${data.base ? `Base ${fmt(data.base)}` : data.type}</div>
+          <div class="sub">${data.base ? `Base ${fmt(data.base)}` : labelByType(data.type)}</div>
           <div class="sub">${owner}</div>
           <div class="tokens" data-pos="${idx}"></div>`;
       }
@@ -39,6 +50,7 @@ export function renderBoard(state) {
     const token = document.createElement('span');
     token.className = 'token';
     token.style.background = team.color;
+    token.textContent = team.name[0]?.toUpperCase() ?? '•';
     token.title = team.name;
     slot.appendChild(token);
   });
@@ -74,7 +86,21 @@ export function renderTeams(state) {
 }
 
 function fmt(n) {
-  return new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(n);
+  return `${new Intl.NumberFormat('es-ES', { maximumFractionDigits: 0 }).format(n)} M$`;
+}
+
+function labelByType(type) {
+  const labels = {
+    start: 'Salida',
+    street: 'Propiedad',
+    question: 'Tarjeta',
+    creditPurchase: 'Compra financiada',
+    loan: 'Préstamo bancario',
+    sale: 'Cobro de venta',
+    grant: 'Ayuda',
+    vatSettlement: 'Pago IVA'
+  };
+  return labels[type] ?? type;
 }
 
 export const boardPath = pathCoords;
