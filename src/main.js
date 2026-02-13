@@ -35,13 +35,22 @@ async function playTurn() {
   if (state.inProgress) return;
   state.inProgress = true;
   const team = state.teams[state.currentTeam];
-  const dice = 1 + Math.floor(Math.random() * 6);
-  await moveTeam(team, dice);
+  const { diceOne, diceTwo, total } = rollDice();
+  btnDado.textContent = `🎲🎲 ${diceOne} + ${diceTwo} = ${total}`;
+  await moveTeam(team, total);
   await resolveCell(team);
   persistAndRender();
   state.currentTeam = (state.currentTeam + 1) % state.teams.length;
   state.inProgress = false;
+  btnDado.textContent = '🎲🎲 Tirar dados';
   persistAndRender();
+}
+
+
+function rollDice() {
+  const diceOne = 1 + Math.floor(Math.random() * 6);
+  const diceTwo = 1 + Math.floor(Math.random() * 6);
+  return { diceOne, diceTwo, total: diceOne + diceTwo };
 }
 
 async function moveTeam(team, steps) {

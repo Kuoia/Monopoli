@@ -2,7 +2,7 @@
   --bg: #0f1e38;
   --panel: #ffffff;
   --text: #11213b;
-  --muted: #58657d;
+  --muted: #000000;
   --border: #d7dfec;
   --ok: #207a3e;
   --warn: #b23c3c;
@@ -60,7 +60,7 @@ main {
   box-shadow: 0 4px 10px rgba(18, 40, 78, .1);
 }
 .cell .title { font-weight: 800; line-height: 1.25; font-size: 1rem; }
-.cell .sub { color: var(--muted); font-size: .8rem; }
+.cell .sub { color: var(--muted); font-size: .85rem; font-weight: 700; }
 .cell .price {
   color: #0c2c6f;
   font-size: 1.05rem;
