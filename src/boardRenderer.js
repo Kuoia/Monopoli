@@ -21,22 +21,14 @@ export function renderBoard(state) {
       if (idx === null) {
         cell.classList.add('cell-center');
         cell.innerHTML = `<div class="center-wrap">
-          <p class="center-brand">MONOPOLI</p>
-          <h3>Centro del tablero</h3>
-          <p class="center-sub">Tarjetas sorpresa y banca central</p>
-          <div class="center-icons" aria-hidden="true">
-            <span>❓</span>
-            <span>💵</span>
-            <span>🏦</span>
-            <span>🎲</span>
-          </div>
+          <img class="center-gif" src="https://media.giphy.com/media/xT5LMHxhOfscxPfIfm/giphy.gif" alt="Animación profesional del centro del tablero" />
         </div>`;
       } else {
         const data = board[idx];
         const owner = ownerTag(state, idx);
         cell.classList.add(`cell-${data.type}`);
         cell.innerHTML = `<div class="title">${data.name}</div>
-          <div class="sub">${data.base ? `Base ${fmt(data.base)}` : labelByType(data.type)}</div>
+          <div class="sub ${data.base ? 'price' : ''}">${data.base ? `Base ${fmt(data.base)}` : labelByType(data.type)}</div>
           <div class="sub">${owner}</div>
           <div class="tokens" data-pos="${idx}"></div>`;
       }
